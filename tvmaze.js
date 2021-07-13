@@ -98,10 +98,8 @@ $("#search-form").on("submit", async function handleSearch (event) {
 async function getEpisodes(id) {
 
   const episodesResponse = await axios.get(`https://api.tvmaze.com/shows/${id}/episodes`);
-  console.log(episodesResponse);
 
   const episodesArr = episodesResponse.data.map(function (episodeRes) {
-    console.log(episodeRes.id);
     const episodeEntry = {
       'id': episodeRes.id,
       'name': episodeRes.name,
@@ -111,7 +109,6 @@ async function getEpisodes(id) {
     return episodeEntry;
   })
 
-  console.log(episodesArr);
   return episodesArr;
 
 }
@@ -121,7 +118,6 @@ function populateEpisodes(episodes) {
   const $episodeList = $('#episodes-list');
 
   for (let episode of episodes) {
-    console.log('this is episode in loop', episode);
     let $episodeListItem = $(
       `<li id="${episode.id}">
         ${episode.name} 
@@ -129,10 +125,8 @@ function populateEpisodes(episodes) {
         number ${episode.number})
       </li>
     `);
-    console.log('this is supposed to be $episodelistitem', $episodeListItem);
     $episodeList.append($episodeListItem);
   }
   $("#episodes-area").show();
-  console.log('this should be the $episodeList', $episodeList);
 }
 
